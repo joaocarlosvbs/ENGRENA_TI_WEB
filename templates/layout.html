@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGRENA TI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="futuristic-menu">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Engrena TI" class="logo">
+            <ul>
+                <li><a href="#semana1">Semana 1</a></li>
+                <li><a href="#semana2">Semana 2</a></li>
+                </ul>
+        </nav>
+        <div class="login-container">
+            <a href="#" id="login-trigger">
+                <img src="{{ url_for('static', filename='images/gear_icon.svg') }}" alt="Admin Login" class="gear-icon">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Acesso Administrativo</h2>
+            <form action="{{ url_for('login') }}" method="post">
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="welcome-banner">
+        <h1>Projeto de Curricularização ENGRENA TI</h1>
+        <p>8 semanas de imersão em tecnologia e programação para o futuro.</p>
+    </div>
+
+    <div class="weeks-container">
+        {% for week in weeks %}
+        <section id="semana{{ week.week_number }}" class="week-card">
+            <img src="{{ url_for('static', filename='images/week_photos/' + week.photo_filename) }}" alt="Foto da Semana {{ week.week_number }}">
+            <div class="week-info">
+                <h2>Semana {{ week.week_number }}: {{ week.title }}</h2>
+                <p>{{ week.description }}</p>
+                <div class="week-links">
+                    <a href="{{ week.video_link }}" target="_blank" class="button">Assistir Aulas</a>
+                    <a href="{{ week.materials_link }}" target="_blank" class="button">Material de Apoio</a>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+
+    {% if session.get('logged_in') %}
+        <a href="{{ url_for('admin') }}" class="admin-panel-button">Painel do Admin</a>
+    {% endif %}
+{% endblock %}

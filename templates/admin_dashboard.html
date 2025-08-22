@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Painel de Controle - ENGRENA TI</h1>
+    <a href="{{ url_for('logout') }}">Sair</a>
+    
+    <form action="{{ url_for('admin') }}" method="post" enctype="multipart/form-data">
+        {% for week in weeks %}
+        <div class="admin-week-editor">
+            <h3>Semana {{ week.week_number }}: {{ week.title }}</h3>
+            <input type="hidden" name="week_id_{{ loop.index0 }}" value="{{ week.id }}">
+            
+            <label>Descrição:</label>
+            <textarea name="description_{{ loop.index0 }}">{{ week.description }}</textarea>
+            
+            <label>Link dos Vídeos:</label>
+            <input type="url" name="video_link_{{ loop.index0 }}" value="{{ week.video_link }}">
+            
+            <label>Link do Material de Apoio:</label>
+            <input type="url" name="materials_link_{{ loop.index0 }}" value="{{ week.materials_link }}">
+            
+            <label>Foto da Semana (deixar em branco para não alterar):</label>
+            <input type="file" name="photo_{{ loop.index0 }}" accept="image/*">
+        </div>
+        {% endfor %}
+        <button type="submit" class="save-button">Salvar Todas as Alterações</button>
+    </form>
+{% endblock %}
